@@ -20,6 +20,17 @@
     border: 0.1rem solid #4f46e5;
 }
 
+.button-primary:disabled{
+    opacity: 0.4;
+    cursor: default;
+}
+
+.button-primary:disabled:hover{
+    background: #6366f1;
+    color: #FFF;
+}
+
+
 .button-primary svg {
     width: 2rem;
     aspect-ratio: 1;

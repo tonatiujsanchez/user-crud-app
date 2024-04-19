@@ -25,7 +25,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block-end: 2rem;
 }
 
 .modal__title {

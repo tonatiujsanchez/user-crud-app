@@ -1,12 +1,13 @@
 .form {
     width: 100%;
+    margin-block-start: 2rem;
 }
 
 .form__image {
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-block-end: 1rem;
+    margin-block-end: 1.5rem;
 }
 
 .form__image .button-primary-soft {
@@ -22,7 +23,6 @@
     border: 0.4rem solid #FFF;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     background: #F1F1F1;
-    cursor: pointer;
 }
 
 .form__img {
@@ -54,7 +54,7 @@
 }
 
 .form__input::placeholder {
-    color: #afafaf;
+    color: #AFAFAF;
 }
 
 .form__error {
@@ -72,6 +72,6 @@
 
 @media (min-width: 568px){
     .form {
-        min-width: 35rem;
+        min-width: 38rem;
     }
 }

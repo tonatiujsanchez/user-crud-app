@@ -1,8 +1,9 @@
 .user {
-    border: 0.1rem solid #EFEFEF;
+    border: 0.1rem solid #EBEBEB;
     border-radius: 0.4rem;
     padding-block: 2rem;
     padding-inline: 1.6rem;
+    width: 100%;
 }
 
 .user__header {
@@ -66,7 +67,7 @@
     gap: 0.5rem;
     color: #AFAFAF;
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 .user__label svg {
@@ -77,6 +78,9 @@
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+    margin-block-start: 1.5rem;
+    padding-block-start: 1rem;
+    border-block-start: 0.1rem solid #F0F0F0;
 }
 
 .user__button {
@@ -88,13 +92,34 @@
 }
 
 .user__button svg{ 
-    width: 1.8rem;
+    width: 1.5rem;
     aspect-ratio: 1;
     vertical-align: middle;
+    stroke-width: 2;
 }
 
-.user__actions {
-    margin-block-start: 1.5rem;
-    padding-block-start: 1rem;
-    border-block-start: 0.1rem solid #F0F0F0;
+.user__button--edit {
+    color: #0284C7;
+    background-color: #E0F2FE;
+}
+
+.user__button--edit:hover {
+    color: #FFF;
+    background-color: #0EA5E9;
+}
+
+.user__button--delete {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+.user__button--delete:hover {
+    background-color: #DC2626;
+    color: #FFF;
+}
+
+@media (min-width: 768px){
+    .user {
+        max-width: 30.8rem;
+    }
 }

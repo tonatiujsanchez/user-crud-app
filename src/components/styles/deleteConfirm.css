@@ -1,0 +1,33 @@
+.delete-confirm {
+    max-width: 50rem;    
+}
+
+.delete-confirm__actions {
+    margin-block-start: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.delete-confirm__actions-button{
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: 0.3s;
+}
+
+.delete-confirm__actions-button:hover {
+    background-color: #DDD;
+}
+
+.delete-confirm__actions--delete {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+.delete-confirm__actions--delete:hover {
+    background-color: #DC2626;
+    color: #FFF;
+}

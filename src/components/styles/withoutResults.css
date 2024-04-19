@@ -1,0 +1,11 @@
+.without-results {
+    text-align: center;
+    margin-block-start: 20rem;
+    color: #AFAFAF;
+    font-size: 1.8rem;
+}
+
+.without-results svg {
+    width: 3.2rem;
+    aspect-ratio: 1;
+}

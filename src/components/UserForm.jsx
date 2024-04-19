@@ -8,7 +8,7 @@ import './styles/userForm.css'
 
 
 const imageMimeType = /image\/(png|jpg|jpeg|gif|webp)/i;
-export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
+export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, isLoading }) => {
 
     // file of images
     const [file, setFile] = useState(null)
@@ -19,14 +19,7 @@ export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
     
 
     const { register, handleSubmit, formState:{ errors }, reset } = useForm({
-        defaultValues:{
-            // image_url: '',
-            first_name: '',
-            last_name: '',
-            email: '',
-            password: '',
-            birthday: '',
-        }
+        defaultValues:userToUpdate
     })
 
 
@@ -65,8 +58,9 @@ export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
 
         // TODO: Si hay un file, subir la imagen y asignarla data.image_url = urlImage
         
-        if(userToEdit){
-            editUser(userToEdit.id, data)
+        if( userToUpdate ){
+            editUser('/users', userToUpdate.id, data)
+            handleCloseModal()
             return
         }
 
@@ -100,7 +94,7 @@ export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
                 <input
                     type="file"
                     style={{ display: 'none' }}
-                    disabled={isLoading}
+                    disabled={ isLoading }
                     ref={ fileInputRef }
                     accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                     onChange={handleFileChange}
@@ -220,7 +214,7 @@ export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
                         ?(
                             'Creando...'
                         ):(
-                            userToEdit ? 'Editar usuario' : 'Agregar nuevo usuario' 
+                            userToUpdate ? 'Editar usuario' : 'Agregar nuevo usuario' 
                         )
                     }
                 </ButtonPrimary>
@@ -230,8 +224,9 @@ export const UserForm = ({ postUser, editUser, userToEdit, isLoading }) => {
 }
 
 UserForm.propTypes = {
-    postUser  : PropTypes.func,
-    editUser  : PropTypes.func,
-    userToEdit: PropTypes.object,
-    isLoading : PropTypes.bool
+    postUser        : PropTypes.func,
+    editUser        : PropTypes.func,
+    userToUpdate    : PropTypes.object,
+    handleCloseModal: PropTypes.func,
+    isLoading       : PropTypes.bool
 }

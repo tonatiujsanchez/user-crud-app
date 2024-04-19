@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useCrud } from './hooks'
-import { ButtonPrimary, Modal, PlusIcon, UserForm, UserList } from './components'
+import { ButtonPrimary, MainLoader, Modal, PlusIcon, UserForm, UserList } from './components'
 import './App.css'
 
 const baseUrl = 'https://users-crud.academlo.tech'
@@ -8,10 +8,13 @@ const baseUrl = 'https://users-crud.academlo.tech'
 function App() {
 
     const [isOpenFormModal, setIsOpenFormModal] = useState(false)
+    const [userToUpdate, setUserToUpdate] = useState()
+
     const [users, getUsers, postUser, deleteUser, editUser, isLoading] = useCrud(baseUrl)
     
     const handleCloseModal = () =>{
         setIsOpenFormModal(false)
+        setUserToUpdate(undefined)
     }
 
     useEffect(() => {
@@ -19,7 +22,7 @@ function App() {
         getUsers(path)
     }, [])
 
-
+    
     return (
         <main className="main">
             <header className="header">
@@ -33,24 +36,31 @@ function App() {
             </header>
             <section>
                 {
+                    isLoading && (
+                        <MainLoader />
+                    )
+                }
+                {
                     users && (
                         <UserList
                             users={ users }
-                            editUser={ editUser }
                             deleteUser={ deleteUser }
+                            setUserToUpdate={ setUserToUpdate }
                         />
                     )
                 }
             </section>
             {
-                isOpenFormModal && (
+                ( isOpenFormModal || !!userToUpdate ) && (
                     <Modal
                         onCloseModal={ handleCloseModal }
-                        title={ 'Nuevo usuario' }
+                        title={ userToUpdate ? 'Editar usuario' : 'Nuevo usuario' }
                     >
                         <UserForm
                             postUser={ postUser }
                             editUser={ editUser }
+                            userToUpdate={ userToUpdate }
+                            handleCloseModal={ handleCloseModal }
                             isLoading={ isLoading }
                         />
                     </Modal>

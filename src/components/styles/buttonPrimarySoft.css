@@ -18,3 +18,13 @@
     background: #6366f1;
     color: #FFF;
 }
+
+.button-primary-soft:disabled{
+    opacity: 0.5;
+    cursor: default;
+}
+
+.button-primary-soft:disabled:hover{
+    background: #e0e7ff;
+    color: #4f46e5;
+}
