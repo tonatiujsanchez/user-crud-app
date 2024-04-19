@@ -10,7 +10,7 @@ function App() {
     const [isOpenFormModal, setIsOpenFormModal] = useState(false)
     const [userToUpdate, setUserToUpdate] = useState()
 
-    const [users, getUsers, postUser, deleteUser, editUser, isLoading] = useCrud(baseUrl)
+    const [users, getUsers, postUser, deleteUser, editUser, isLoadingUsers, isLoading] = useCrud(baseUrl)
     
     const handleCloseModal = () =>{
         setIsOpenFormModal(false)
@@ -36,16 +36,17 @@ function App() {
             </header>
             <section>
                 {
-                    isLoading && (
+                    isLoadingUsers && (
                         <MainLoader />
                     )
                 }
                 {
-                    users && (
+                    users && !isLoadingUsers && (
                         <UserList
                             users={ users }
                             deleteUser={ deleteUser }
                             setUserToUpdate={ setUserToUpdate }
+                            isLoading={ isLoading }
                         />
                     )
                 }

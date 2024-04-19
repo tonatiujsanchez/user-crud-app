@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
-import { ButtonPrimary, ButtonPrimarySoft } from './'
+import { ButtonPrimary, ButtonPrimarySoft, Loader } from './'
 import { isEmail } from './utils'
 import noUserImage from '/no-user-image.webp'
 import './styles/userForm.css'
@@ -18,7 +18,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
     const fileInputRef = useRef()
     
 
-    const { register, handleSubmit, formState:{ errors }, reset } = useForm({
+    const { register, handleSubmit, formState:{ errors } } = useForm({
         defaultValues:userToUpdate
     })
 
@@ -54,18 +54,18 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
     },[file])
 
 
-    const handleUserSubmit = (data) => {
+    const handleUserSubmit = async(data) => {
 
         // TODO: Si hay un file, subir la imagen y asignarla data.image_url = urlImage
         
         if( userToUpdate ){
-            editUser('/users', userToUpdate.id, data)
+            await editUser('/users', userToUpdate.id, data)
             handleCloseModal()
             return
         }
 
-        postUser('/users', data)
-        reset()
+        await postUser('/users', data)
+        handleCloseModal()
     }
 
 
@@ -110,6 +110,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                 <input
                     type="text"
                     id="first_name"
+                    disabled={ isLoading }
                     placeholder="Nombre"
                     className="form__input"
                     {...register('first_name', {
@@ -131,6 +132,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                 <input
                     type="text"
                     id="last_name"
+                    disabled={ isLoading }
                     placeholder="Apellidos"
                     className="form__input"
                     {...register('last_name', {
@@ -152,6 +154,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                 <input
                     type="text"
                     id="email"
+                    disabled={ isLoading }
                     placeholder="Ingrese su correo"
                     className="form__input"
                     {...register('email', {
@@ -173,6 +176,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                 <input
                     type="password"
                     id="password"
+                    disabled={ isLoading }
                     placeholder="Contraseña"
                     className="form__input"
                     {...register('password', {
@@ -194,6 +198,7 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                 <input
                     type="date"
                     id="birthday"
+                    disabled={ isLoading }
                     placeholder="Cumpleaños"
                     className="form__input"
                     { ...register('birthday', {
@@ -212,9 +217,12 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
                     {
                         isLoading 
                         ?(
-                            'Creando...'
+                            <>
+                                <Loader />
+                                { userToUpdate ? 'Guardando...' : 'Creando usuario...' }
+                            </>
                         ):(
-                            userToUpdate ? 'Editar usuario' : 'Agregar nuevo usuario' 
+                            userToUpdate ? 'Guardar cambios' : 'Agregar nuevo usuario' 
                         )
                     }
                 </ButtonPrimary>

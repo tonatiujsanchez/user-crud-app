@@ -10,16 +10,26 @@
 }
 
 .delete-confirm__actions-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 0.4rem;
     cursor: pointer;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     transition: 0.3s;
+    width: 9rem;
+    height: 3rem;
 }
 
 .delete-confirm__actions-button:hover {
     background-color: #DDD;
+}
+
+.delete-confirm__actions-button:disabled:hover {
+    background-color: unset;
+    cursor: default;
 }
 
 .delete-confirm__actions--delete {
@@ -30,4 +40,14 @@
 .delete-confirm__actions--delete:hover {
     background-color: #DC2626;
     color: #FFF;
+}
+
+.delete-confirm__actions--delete:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.delete-confirm__actions--delete:disabled:hover {
+    background-color: #FEE2E2;
+    color: #DC2626;
 }

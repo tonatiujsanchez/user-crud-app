@@ -3,7 +3,7 @@ import { DeleteConfirm, Modal, UserCard, WithoutResults } from './'
 import './styles/userList.css'
 import { useState } from 'react'
 
-export const UserList = ({ users, deleteUser, setUserToUpdate }) => {
+export const UserList = ({ users, deleteUser, setUserToUpdate, isLoading }) => {
 
     const [userToDelete, setUserToDelete] = useState()
 
@@ -45,11 +45,13 @@ export const UserList = ({ users, deleteUser, setUserToUpdate }) => {
                     <Modal
                         onCloseModal={ handleCloseModalDelete }
                         title="Eliminar usuario"
+                        titleSize="2.5rem"
                     >
                         <p>{ userToDelete.first__name }</p>
                         <DeleteConfirm
                             userToDelete={ userToDelete }
                             handleConfirm={ handleConfirm }
+                            isLoading={ isLoading }
                         />
 
                     </Modal>
@@ -63,4 +65,5 @@ UserList.propTypes = {
     users          : PropTypes.array,
     deleteUser     : PropTypes.func,
     setUserToUpdate: PropTypes.func,
+    isLoading      : PropTypes.bool
 }

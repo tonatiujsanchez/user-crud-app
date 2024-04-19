@@ -5,11 +5,14 @@ export const useCrud = (baseUrl) => {
     
     const [apiData, setApiData] = useState()
     const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingUsers, setIsLoadingUsers] = useState(false)
     
     // ===== ===== Read ===== ===== 
     const getApi = ( path ) => {
-        setIsLoading(true)
+        
+        setIsLoadingUsers(true)
         const url = `${ baseUrl }${ path }/`
+
         axios.get(url)
             .then(({ data }) => {
                 setApiData(data)
@@ -18,60 +21,59 @@ export const useCrud = (baseUrl) => {
                 console.log(error)
             })
             .finally(()=>{
-                setIsLoading(false)
+                setIsLoadingUsers(false)
             })
     }
     
     // ===== ===== Create ===== =====
-    const postApi = ( path, newData ) => {
+    const postApi = async( path, newData ) => {
+
         const url = `${ baseUrl }${ path }/`
         setIsLoading(true)
-        axios.post(url, newData)
-            .then(({ data }) => {
-                console.log(data)
-                setApiData([ ...apiData, data ])
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-            .finally(()=>{
-                setIsLoading(false)
-            })
+    
+        try {
+            const { data } = await axios.post(url, newData)
+            setApiData([ ...apiData, data ])
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
+
     // ===== ===== Delete ===== =====
-    const deleteApi = ( path, id ) => {
+    const deleteApi = async( path, id ) => {
+
         const url = `${ baseUrl }${ path }/${id}/`
         setIsLoading(true)
-        axios.delete(url)
-            .then(({ data }) => {
-                setApiData(apiData.filter( element =>  element.id !== id ) )
-                console.log( data )
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-            .finally(()=>{
-                setIsLoading(false)
-            })
+
+        try {
+            await axios.delete(url)
+            setApiData(apiData.filter( element =>  element.id !== id ) )
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     // ===== ===== Update ===== =====
-    const patchApi = ( path, id, data ) => {
+    const patchApi = async( path, id, data ) => {
+
         const url = `${ baseUrl }${ path }/${id}/`
         setIsLoading(true)
-        axios.patch(url, data)
-            .then((res) => {
-                setApiData(apiData.map( element =>  element.id === id ? res.data : element ) )
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-            .finally(()=>{
-                setIsLoading(false)
-            })
+
+        try {
+            const res = await axios.patch(url, data)
+            setApiData(apiData.map( element =>  element.id === id ? res.data : element ) )
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     
-    return [ apiData, getApi, postApi, deleteApi, patchApi, isLoading ]
+    return [ apiData, getApi, postApi, deleteApi, patchApi, isLoadingUsers, isLoading ]
 }
