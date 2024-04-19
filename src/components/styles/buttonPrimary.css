@@ -1,0 +1,26 @@
+.button-primary {
+    background: #6366f1;
+    color: #FFF;
+    border: 0.1rem solid transparent;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 0.4rem;
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: 0.5s;
+    height: 4.5rem;
+}
+
+.button-primary:hover {
+    background: #e0e7ff;
+    color: #4f46e5;
+    border: 0.1rem solid #4f46e5;
+}
+
+.button-primary svg {
+    width: 2rem;
+    aspect-ratio: 1;
+}

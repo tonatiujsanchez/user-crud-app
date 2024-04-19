@@ -1,0 +1,13 @@
+.users {
+    display: grid;
+    gap: 2rem;
+    padding-inline: 2rem;
+    margin-block: 2rem;
+}
+
+@media (min-width: 500px){
+    .users {
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        margin-block: 4rem;
+    }
+}

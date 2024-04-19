@@ -1,0 +1,57 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+}
+
+.modal__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.5s;
+}
+
+.modal__content {
+    background: #FFF;
+    border-radius: 0.5rem;
+    padding: 2.5rem 2.5rem;
+    z-index: 10;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 2rem;
+}
+
+.modal__title {
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+.modal__close-button {
+    display: block;
+    border: 0.1rem solid #ECECEC;
+    color: #7e7e7e;
+    background: none;
+    width: 3rem;
+    aspect-ratio: 1;
+    margin-inline-start: auto;
+    cursor: pointer;
+    border-radius: 0.4rem;       
+}
+
+.modal__close-button svg {
+    width: 1.8rem;
+    aspect-ratio: 1;
+    vertical-align: middle;
+}
+
+.modal__close-button:hover {
+    background: #ECECEC;
+    color: #333;
+}

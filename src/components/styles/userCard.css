@@ -1,0 +1,100 @@
+.user {
+    border: 0.1rem solid #EFEFEF;
+    border-radius: 0.4rem;
+    padding-block: 2rem;
+    padding-inline: 1.6rem;
+}
+
+.user__header {
+    display: flex;
+    gap: 1.6rem;
+    margin-block-end: 1.5rem;
+}
+
+.user__figure {
+    min-width: 9rem;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 0.4rem solid #FFF;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    background: #F1F1F1;
+}
+
+.user__letter {
+    min-width: 9rem;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 0.5rem;
+    border: 0.4rem solid #FFF;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    background: #F1F1F1;
+    display: grid;
+    place-content: center;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #AFAFAF;
+}
+
+.user__img {
+    object-fit: contain;
+    aspect-ratio: 1;
+}
+
+.user__name {
+    display: flex;
+    flex-direction: column;
+    max-width: 18rem;
+}
+
+.user__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-inline-start: 1rem;
+}
+
+.user__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.user__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #AFAFAF;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+
+.user__label svg {
+    width: 1.7rem;
+}
+
+.user__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.user__button {
+    width: 3rem;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.user__button svg{ 
+    width: 1.8rem;
+    aspect-ratio: 1;
+    vertical-align: middle;
+}
+
+.user__actions {
+    margin-block-start: 1.5rem;
+    padding-block-start: 1rem;
+    border-block-start: 0.1rem solid #F0F0F0;
+}
