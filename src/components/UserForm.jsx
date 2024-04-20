@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
-import { ButtonPrimary, ButtonPrimarySoft, Loader } from './'
+import { ButtonPrimary, ButtonPrimarySoft, Loader, XIcon } from './'
 import { isEmail } from './utils'
+import { imageUpload } from '../services'
 import noUserImage from '/no-user-image.webp'
 import './styles/userForm.css'
 
@@ -15,6 +16,8 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
     const [fileDataURL, setFileDataURL] = useState(null)
     const [imageEdit, setImageEdit] = useState()
 
+    const [imageIsUploading, setImageIsUploading] = useState(false)
+
     const fileInputRef = useRef()
     
 
@@ -22,6 +25,20 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
         defaultValues:userToUpdate
     })
 
+    
+    useEffect(()=>{
+        if(userToUpdate){
+            setImageEdit(userToUpdate.image_url)
+        }
+    },[userToUpdate])
+    
+
+    const onRemoveImage = () => {
+        setFile(null)
+        setFileDataURL(null)
+        setImageEdit(null)
+        fileInputRef.current.value = null
+    }
 
     const handleFileChange = (e) => {
         if( !e.target.files || e.target.files.length === 0 ){
@@ -56,8 +73,21 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
 
     const handleUserSubmit = async(data) => {
 
-        // TODO: Si hay un file, subir la imagen y asignarla data.image_url = urlImage
-        
+        if( file ){
+            setImageIsUploading(true)
+            const { hasError, urlImage } = await imageUpload( file )
+            if(hasError){
+                console.log('Hubo un error al subir la imagen')
+            }
+            
+            data.image_url = urlImage
+            setImageIsUploading(false)
+        }
+
+        if(!file && !imageEdit){
+            data.image_url = null
+        }
+
         if( userToUpdate ){
             await editUser('/users', userToUpdate.id, data)
             handleCloseModal()
@@ -75,19 +105,34 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
             onSubmit={ handleSubmit(handleUserSubmit) }
         >
             <div className="form__image">
-                <figure 
-                    onClick={ ()=> fileInputRef.current.click() }
-                    className="form__figure"
-                >
-                    <img 
-                        src={ fileDataURL || imageEdit || noUserImage } 
-                        alt="Foto de usuario"
-                        className="form__img"
-                    />
-                </figure>
+                <div className="form__image-content">
+                    <figure 
+                        onClick={ ()=> fileInputRef.current.click() }
+                        className="form__figure"
+                    >
+                        <img 
+                            src={ fileDataURL || imageEdit || noUserImage } 
+                            alt="Foto de usuario"
+                            className="form__img"
+                        />
+                    </figure>
+                    {
+                        ( fileDataURL || imageEdit )
+                        && (
+                            <button 
+                                type="button"
+                                onClick={ onRemoveImage }
+                                disabled={ isLoading || imageIsUploading }
+                                className="form__figure--button-remove"
+                            >
+                                <XIcon />
+                            </button>
+                        )
+                    }
+                </div>
                 <ButtonPrimarySoft
                     onClick={ ()=> fileInputRef.current.click() }
-                    disabled={ isLoading }
+                    disabled={ isLoading || imageIsUploading }
                 >
                     Seleccionar
                 </ButtonPrimarySoft>
@@ -212,17 +257,21 @@ export const UserForm = ({ postUser, editUser, userToUpdate, handleCloseModal, i
             <div className="form__button">
                 <ButtonPrimary
                     type="submit"
-                    disabled={ isLoading }
+                    disabled={ isLoading || imageIsUploading }
                 >
                     {
-                        isLoading 
-                        ?(
-                            <>
-                                <Loader />
-                                { userToUpdate ? 'Guardando...' : 'Creando usuario...' }
-                            </>
-                        ):(
-                            userToUpdate ? 'Guardar cambios' : 'Agregar nuevo usuario' 
+                        imageIsUploading
+                        ? <><Loader /> Subiendo imagen</>
+                        :(
+                            isLoading 
+                            ?(
+                                <>
+                                    <Loader />
+                                    { userToUpdate ? 'Guardando...' : 'Creando usuario...' }
+                                </>
+                            ):(
+                                userToUpdate ? 'Guardar cambios' : 'Agregar nuevo usuario' 
+                            )
                         )
                     }
                 </ButtonPrimary>

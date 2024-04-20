@@ -13,7 +13,7 @@ export const UserCard = ({ user, setUserToUpdate, setUserToDelete }) => {
                     ?(
                         <figure className="user__figure">
                             <img 
-                                src="https://placeimg.com/640/480/people" 
+                                src={ user.image_url }
                                 alt={`${ user.first_name } ${ user.last_name }`}
                                 className="user__img" 
                             />

@@ -22,7 +22,6 @@ function App() {
         getUsers(path)
     }, [])
 
-    
     return (
         <main className="main">
             <header className="header">

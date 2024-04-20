@@ -10,19 +10,41 @@
     margin-block-end: 1.5rem;
 }
 
+
 .form__image .button-primary-soft {
     height: auto;
     padding: 1rem 1.2rem;
+}
+
+.form__image-content {
+    position: relative;
 }
 
 .form__figure {
     width: 10rem;
     height: 10rem;
     border-radius: 0.5rem;
-    overflow: hidden;
     border: 0.4rem solid #FFF;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     background: #F1F1F1;
+}
+
+.form__figure--button-remove {
+    position: absolute;
+    inset-block-start: -0.7rem;
+    inset-inline-end: -0.8rem;
+    background: none;
+    border: none;
+    color: #7e7e7e;
+    cursor: pointer;
+}
+
+.form__figure--button-remove:hover {
+    color: #333;
+}
+
+.form__figure--button-remove svg {
+    width: 1.8rem;
 }
 
 .form__img {

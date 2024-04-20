@@ -63,7 +63,7 @@ export const useCrud = (baseUrl) => {
 
         const url = `${ baseUrl }${ path }/${id}/`
         setIsLoading(true)
-
+        
         try {
             const res = await axios.patch(url, data)
             setApiData(apiData.map( element =>  element.id === id ? res.data : element ) )
