@@ -1,0 +1,34 @@
+.error-msg {
+    text-align: center;
+    color: #e01818;
+    margin-block-start: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.error-msg svg {
+    width: 3rem;
+}
+
+
+.error-refresh {
+    margin-block-start: 2rem;
+    border: 0.1rem solid transparent;
+    padding: 0.6rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 0.4rem;
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.error-refresh:hover {
+    background: #e0e7ff;
+    color: #4f46e5;
+    border: 0.1rem solid #4f46e5;
+}

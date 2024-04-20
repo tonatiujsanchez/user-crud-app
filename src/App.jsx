@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useCrud } from './hooks'
-import { ButtonPrimary, MainLoader, Modal, PlusIcon, UserForm, UserList } from './components'
+import { ButtonPrimary, MainLoader, Modal, MsgError, PlusIcon, UserForm, UserList } from './components'
 import './App.css'
 
 const baseUrl = 'https://users-crud.academlo.tech'
@@ -10,7 +10,7 @@ function App() {
     const [isOpenFormModal, setIsOpenFormModal] = useState(false)
     const [userToUpdate, setUserToUpdate] = useState()
 
-    const [users, getUsers, postUser, deleteUser, editUser, isLoadingUsers, isLoading] = useCrud(baseUrl)
+    const [users, getUsers, postUser, deleteUser, editUser, isLoadingUsers, isLoading, hasError] = useCrud(baseUrl)
     
     const handleCloseModal = () =>{
         setIsOpenFormModal(false)
@@ -37,6 +37,11 @@ function App() {
                 {
                     isLoadingUsers && (
                         <MainLoader />
+                    )
+                }
+                {
+                    !isLoadingUsers && !users && hasError && (
+                        <MsgError getUsers={ getUsers } />
                     )
                 }
                 {

@@ -33,6 +33,11 @@ img {
     list-style: none;
 }
 
+/* ====== ====== ====== TOAST ====== ====== ======  */
+.toast {
+    padding: 1.2rem;
+}
+
 .main {
     max-width: 100.4rem;
     margin-inline: auto;
@@ -50,6 +55,39 @@ img {
     color: #e01818;
     font-size: 1.3rem;
 }
+
+
+
+/* Custom scroll */
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+  
+body::-webkit-scrollbar:vertical {
+    width:0.8rem;
+  }
+  
+body::-webkit-scrollbar-button:increment,body::-webkit-scrollbar-button {
+    display: none;
+} 
+  
+body::-webkit-scrollbar:horizontal {
+    height: 0.8rem;
+}
+  
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(238, 238, 238);
+    border-radius: 1rem;
+    border: 0.2rem solid #e6e6e6;
+}
+  
+body::-webkit-scrollbar-track {
+    border-radius: 0.8rem;  
+}
+  
+
+
+
 
 @media (min-width: 768px){
     .header {

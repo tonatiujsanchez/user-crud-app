@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { toastError, toastSuccess } from '../libs'
+
+
 
 export const useCrud = (baseUrl) => {
     
     const [apiData, setApiData] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingUsers, setIsLoadingUsers] = useState(false)
+    const [hasError, setHasError] = useState(false)
     
     // ===== ===== Read ===== ===== 
     const getApi = ( path ) => {
@@ -16,8 +20,10 @@ export const useCrud = (baseUrl) => {
         axios.get(url)
             .then(({ data }) => {
                 setApiData(data)
+                setHasError(false)
             })
             .catch((error)=>{
+                setHasError(true)
                 console.log(error)
             })
             .finally(()=>{
@@ -34,8 +40,10 @@ export const useCrud = (baseUrl) => {
         try {
             const { data } = await axios.post(url, newData)
             setApiData([ ...apiData, data ])
+            toastSuccess('Usuario creado correctamente')
         } catch (error) {
             console.log(error)
+            toastError('Hubo un error al intentar crear el usuario')
         } finally {
             setIsLoading(false)
         }
@@ -51,8 +59,10 @@ export const useCrud = (baseUrl) => {
         try {
             await axios.delete(url)
             setApiData(apiData.filter( element =>  element.id !== id ) )
+            // Mostrar una alert para indicar al usuario que el usuario fue eliminado
         } catch (error) {
             console.log(error)
+            toastError('Hubo un error al intentar eliminar el usuario')
         } finally {
             setIsLoading(false)
         }
@@ -67,13 +77,15 @@ export const useCrud = (baseUrl) => {
         try {
             const res = await axios.patch(url, data)
             setApiData(apiData.map( element =>  element.id === id ? res.data : element ) )
+            toastSuccess('Usuario actualizado correctamente')
         } catch (error) {
             console.log(error)
+            toastError('Hubo un error al intentar actualizar el usuario')
         } finally {
             setIsLoading(false)
         }
     }
 
     
-    return [ apiData, getApi, postApi, deleteApi, patchApi, isLoadingUsers, isLoading ]
+    return [ apiData, getApi, postApi, deleteApi, patchApi, isLoadingUsers, isLoading, hasError ]
 }
