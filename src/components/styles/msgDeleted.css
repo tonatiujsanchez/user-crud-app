@@ -1,0 +1,13 @@
+.msg-deleted {
+    margin-block-start: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 35rem;
+}
+
+.msg-deleted button {
+    margin-block-start: 1rem;
+    height: 3.8rem;
+    padding-block: 1rem;
+}

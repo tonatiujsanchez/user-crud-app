@@ -13,7 +13,7 @@ export const UserList = ({ users, deleteUser, setUserToUpdate, isLoading }) => {
 
     const handleConfirm = async( confirm ) => {
         if( confirm ){
-            await deleteUser( '/users', userToDelete.id )
+            await deleteUser( '/users', userToDelete )
         }
         
         handleCloseModalDelete()
@@ -45,7 +45,7 @@ export const UserList = ({ users, deleteUser, setUserToUpdate, isLoading }) => {
                     <Modal
                         onCloseModal={ handleCloseModalDelete }
                         title="Eliminar usuario"
-                        titleSize="2.5rem"
+                        
                     >
                         <p>{ userToDelete.first__name }</p>
                         <DeleteConfirm

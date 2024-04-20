@@ -10,6 +10,8 @@ export const useCrud = (baseUrl) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingUsers, setIsLoadingUsers] = useState(false)
     const [hasError, setHasError] = useState(false)
+
+    const [userDeleted, setUserDeleted] = useState()
     
     // ===== ===== Read ===== ===== 
     const getApi = ( path ) => {
@@ -51,15 +53,16 @@ export const useCrud = (baseUrl) => {
 
 
     // ===== ===== Delete ===== =====
-    const deleteApi = async( path, id ) => {
+    const deleteApi = async( path, user ) => {
 
-        const url = `${ baseUrl }${ path }/${id}/`
+        const url = `${ baseUrl }${ path }/${user.id}/`
         setIsLoading(true)
 
         try {
             await axios.delete(url)
-            setApiData(apiData.filter( element =>  element.id !== id ) )
+            setApiData(apiData.filter( element =>  element.id !== user.id ) )
             // Mostrar una alert para indicar al usuario que el usuario fue eliminado
+            setUserDeleted(user)
         } catch (error) {
             console.log(error)
             toastError('Hubo un error al intentar eliminar el usuario')
@@ -87,5 +90,15 @@ export const useCrud = (baseUrl) => {
     }
 
     
-    return [ apiData, getApi, postApi, deleteApi, patchApi, isLoadingUsers, isLoading, hasError ]
+    return [ 
+        apiData, 
+        getApi, 
+        postApi, 
+        deleteApi, 
+        patchApi, 
+        isLoadingUsers, 
+        isLoading,
+        userDeleted,
+        setUserDeleted, 
+        hasError ]
 }

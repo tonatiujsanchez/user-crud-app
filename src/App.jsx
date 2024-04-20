@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useCrud } from './hooks'
-import { ButtonPrimary, MainLoader, Modal, MsgError, PlusIcon, UserForm, UserList } from './components'
+import { ButtonPrimary, MainLoader, Modal, MsgDeleted, MsgError, PlusIcon, UserForm, UserList } from './components'
 import './App.css'
 
 const baseUrl = 'https://users-crud.academlo.tech'
@@ -10,7 +10,7 @@ function App() {
     const [isOpenFormModal, setIsOpenFormModal] = useState(false)
     const [userToUpdate, setUserToUpdate] = useState()
 
-    const [users, getUsers, postUser, deleteUser, editUser, isLoadingUsers, isLoading, hasError] = useCrud(baseUrl)
+    const [users, getUsers, postUser, deleteUser, editUser, isLoadingUsers, isLoading, userDeleted, setUserDeleted, hasError] = useCrud(baseUrl)
     
     const handleCloseModal = () =>{
         setIsOpenFormModal(false)
@@ -67,6 +67,19 @@ function App() {
                             userToUpdate={ userToUpdate }
                             handleCloseModal={ handleCloseModal }
                             isLoading={ isLoading }
+                        />
+                    </Modal>
+                )
+            }
+            {
+                !!userDeleted && (
+                    <Modal
+                        onCloseModal={ ()=> setUserDeleted(undefined) }
+                        title="¡Usuario eliminado!"
+                    >
+                        <MsgDeleted
+                            userDeleted={ userDeleted }
+                            onCloseModal={ ()=> setUserDeleted(undefined) }
                         />
                     </Modal>
                 )

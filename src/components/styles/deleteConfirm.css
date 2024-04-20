@@ -1,5 +1,6 @@
 .delete-confirm {
-    max-width: 50rem;    
+    margin-block-start: 1rem;
+    max-width: 35rem;    
 }
 
 .delete-confirm__actions {
@@ -19,12 +20,15 @@
     cursor: pointer;
     font-size: 1.5rem;
     transition: 0.3s;
-    width: 9rem;
-    height: 3rem;
+    width: 10rem;
+    height: 3.6rem;
+    font-weight: 600;
+    color: #525252;
 }
 
 .delete-confirm__actions-button:hover {
     background-color: #DDD;
+    color: #333;
 }
 
 .delete-confirm__actions-button:disabled:hover {
