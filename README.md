@@ -12,8 +12,8 @@ El propósito de esta aplicación es LEER, CREAR, ACTUALIZAR y ELIMINAR usuarios
 - **Interactividad:** He implementado elementos interactivos y animaciones suaves para mejorar la experiencia del usuario.
     - Pantalla de carga para indicar que esta cargando el listado de usuarios. 
     - Un modal con un formulario para crear y editar usuarios.  
-    - Una alerta para iniciar cuando un usuario a sido eliminado.
-    - Implante la librería [sonner](https://sonner.emilkowal.ski) para mostrar un toast cuando un usuario es creado o actualizado.
+    - Una alerta personalizada para indicar cuando un usuario a sido eliminado.
+    - Implementé la librería [sonner](https://sonner.emilkowal.ski) para mostrar un toast cuando un usuario es creado o actualizado.
     - Subida de imágenes a [Cloudinary](https://cloudinary.com) para añadir una fotografía a cada usuario desde el ordenador.
 
 - **Tecnologías utilizadas:**
