@@ -20,6 +20,8 @@
     border-radius: 0.5rem;
     padding: 2.5rem 2.5rem;
     z-index: 10;
+    max-height: 100vh;
+    overflow-y: auto;
     animation: slideInFromTop 0.2s ease-out;
 }
 
